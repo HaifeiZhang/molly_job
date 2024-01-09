@@ -26,7 +26,6 @@ export default function Start() {
     var newLan = lan==="EN"?"CN":"EN";
     setLan(newLan)
     localStorage.setItem("Lan",newLan);
-    console.log(newLan);
   };
 
   return (

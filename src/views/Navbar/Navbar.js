@@ -14,6 +14,7 @@ function Navbar(props) {
     const [activeItem, setActiveItem] = useState("");
     const [hoveredItem, setHoveredItem] = useState(null);
     const texts = localStorage.getItem("Lan")==="CN"?texts_CN:texts_EN
+    const lan = localStorage.getItem("Lan");
     const updateActiveItemBasedOnPath = (path) => {
       switch(path) {
           case '/layout/interview':
@@ -52,6 +53,12 @@ function Navbar(props) {
     };
     const backToStart = () => {
       navigate('/start')
+  };
+  const switchLanguage = () => {
+    var newLan = lan==="EN"?"CN":"EN";
+    localStorage.setItem("Lan",newLan);
+    const hash = window.location.hash.substring(1);
+    navigate(hash);
   };
 
     useEffect(() => {
@@ -95,7 +102,8 @@ function Navbar(props) {
       >
         {texts.homeTexts.matchTxt}
       </div>
-
+      <div>
+      <button onClick={switchLanguage} className={styles.languageButton}>{lan==="EN"?"简体中文":"English"}</button>
       <Dropdown
       //overlay
       overlay={
@@ -124,7 +132,8 @@ function Navbar(props) {
           icon={<UserOutlined />}
           style={{ backgroundColor: "black", cursor: "pointer" }}
         />
-      </Dropdown>      
+      </Dropdown>
+      </div>      
     </div>
     {props.children} 
     </div>

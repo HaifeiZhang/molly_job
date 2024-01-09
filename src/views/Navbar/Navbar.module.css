@@ -45,3 +45,10 @@
     cursor: pointer;
 }
 
+.languageButton {
+  background: transparent;
+  padding: 10px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+

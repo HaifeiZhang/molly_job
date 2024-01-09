@@ -5,6 +5,8 @@ import texts_CN from '../texts_CN';
 import styles from './Home.module.css'
 import studyShowImg from '../../assets/images/studyShowImg.png'
 import careerShowImg from '../../assets/images/careerShowImg.png'
+import {checkStdDataGroup} from '../../utils/api'
+import { Alert } from 'antd';
 
 export default function Home() {
   const navigate = useNavigate()
@@ -12,8 +14,20 @@ export default function Home() {
   const handleToGeneralQ = ()=>{
     navigate("/layout")
   }
-  const handleToCoverLetter = ()=>{
-    navigate("/layout/coverletter")
+  const handleToCoverLetter = async ()=>{
+    try {
+      const uId = localStorage.getItem("uId");
+      const response = await checkStdDataGroup(uId);
+      if(response.data){
+        navigate("/layout/coverletter")
+      }
+      else{
+        navigate("/layout")
+      }
+    } catch (error) {
+      Alert(error)
+    }
+    
   }
   const handleToResume = ()=>{
     navigate("/layout/resume")

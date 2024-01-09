@@ -119,7 +119,7 @@ export const downloadCoverLetterPdf = async(uId,countId,lan)=>{
                 // 'Content-Type': 'multipart/form-data',
                 'accept': '*/*',
             },
-            timeout: 10000,       
+            timeout: 30000,       
             // ... 其他配置
            });
 
@@ -140,7 +140,7 @@ export const getCoverLetterImg = async(uId,countId,lan)=>{
                 // 'Content-Type': 'multipart/form-data',
                 'accept': '*/*',
             },
-            timeout: 10000,       
+            timeout: 50000,       
             // ... 其他配置
            });
 
@@ -200,6 +200,26 @@ export const createJobCoverLetter = async(dataGroup)=>{
             url: postUrl,
             responseType: 'blob', // Important
             data:dataGroup,    
+            headers: {           
+                // 'Content-Type': 'multipart/form-data',
+                'accept': '*/*',
+            },
+            timeout: 10000,       
+            // ... 其他配置
+           });
+
+           return response
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const checkStdDataGroup = async(uId)=>{
+    const postUrl = `/api/CheckDataGroup/CheckStdDataGroup?uId=${uId}`
+    try {
+        const response = await axios({
+            method: 'get',      
+            url: postUrl,
             headers: {           
                 // 'Content-Type': 'multipart/form-data',
                 'accept': '*/*',
